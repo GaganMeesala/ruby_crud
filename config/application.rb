@@ -11,18 +11,20 @@ module RubyCrud
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    # For loading lib folder files
+    config.autoload_paths << Rails.root.join('lib')
+    # To avoid authenticity token
     config.api_only = false
 
+    # To enforce UTF-8 (while creating database)
+    # config.encoding = "utf-8"
+
+    # Accepting for cross origin request
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options]
       end
     end
-
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
   end
 end
